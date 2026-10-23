@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         createChannelIfNeeded(notificationManager);
 
-        // Запрос разрешения на показ уведомлений для Android 13+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Кнопки переключения времени суток
     public void btnMorningClick(View view) {
         layoutMorning.setVisibility(View.VISIBLE);
         imgDay.setVisibility(View.INVISIBLE);
@@ -91,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
         sendNotification(R.drawable.sunset, "Ночь", "Полюбоваться звездами");
     }
-
-    // Всплывающие подсказки (Toast)
     public void onPrinceClick(View view) {
         Toast.makeText(this, "Маленький принц", Toast.LENGTH_LONG).show();
     }
@@ -112,8 +108,6 @@ public class MainActivity extends AppCompatActivity {
     public void onBreakfastClick(View view) {
         Toast.makeText(this, "Действующий вулкан, на нем удобно разогревать завтрак", Toast.LENGTH_LONG).show();
     }
-
-    // Отправка системного уведомления
     private void sendNotification(int iconResId, String title, String text) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -143,8 +137,6 @@ public class MainActivity extends AppCompatActivity {
 
         notificationManager.notify(NOTIFY_ID, notificationBuilder.build());
     }
-
-    // Регистрация канала уведомлений
     private static void createChannelIfNeeded(NotificationManager manager) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(
